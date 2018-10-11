@@ -1,0 +1,15 @@
+{
+  "name": "image",
+  "collaborators": [
+    "Simon Månsson <simon.mansson@niftitech.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "image_bg.wasm",
+    "image.js",
+    "image.d.ts"
+  ],
+  "module": "image.js",
+  "types": "image.d.ts",
+  "sideEffects": "false"
+}

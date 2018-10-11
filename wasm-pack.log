@@ -1,0 +1,342 @@
+Oct 06 15:58:26.707 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+error[E0412]: cannot find type `Cell` in this scope
+  --> src/lib.rs:84:35
+   |
+84 |     pub fn cells(&self) -> *const Cell {
+   |                                   ^^^^ not found in this scope
+help: possible candidate is found in another module, you can import it into scope
+   |
+6  | use wasm_bindgen::__rt::core::cell::Cell;
+   |
+
+error[E0615]: attempted to take value of method `cells` on type `&Image`
+  --> src/lib.rs:85:14
+   |
+85 |         self.cells.as_ptr()
+   |              ^^^^^
+   |
+   = help: maybe a `()` to call it is missing?
+
+error: aborting due to 2 previous errors
+
+Some errors occurred: E0412, E0615.
+For more information about an error, try `rustc --explain E0412`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 06 16:02:24.045 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+error[E0412]: cannot find type `Cell` in this scope
+  --> src/lib.rs:95:35
+   |
+95 |     pub fn cells(&self) -> *const Cell {
+   |                                   ^^^^ not found in this scope
+help: possible candidate is found in another module, you can import it into scope
+   |
+6  | use wasm_bindgen::__rt::core::cell::Cell;
+   |
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0412`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 06 16:06:35.507 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+error[E0282]: type annotations needed
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0282`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 06 16:06:50.426 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+error[E0282]: type annotations needed
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0282`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 06 16:08:00.518 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+error[E0277]: a collection of type `std::vec::Vec<Pixel>` cannot be built from an iterator over elements of type `()`
+  |
+  = help: the trait `std::iter::FromIterator<()>` is not implemented for `std::vec::Vec<Pixel>`
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0277`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 06 16:08:37.491 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+error[E0277]: a collection of type `std::vec::Vec<Pixel>` cannot be built from an iterator over elements of type `()`
+  |
+  = help: the trait `std::iter::FromIterator<()>` is not implemented for `std::vec::Vec<Pixel>`
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0277`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 06 16:11:08.059 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+error[E0277]: a collection of type `std::vec::Vec<Pixel>` cannot be built from an iterator over elements of type `()`
+  |
+  = help: the trait `std::iter::FromIterator<()>` is not implemented for `std::vec::Vec<Pixel>`
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0277`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 06 16:15:21.951 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+warning: unnecessary parentheses around `for` head expression
+  |
+  = note: #[warn(unused_parens)] on by default
+
+error[E0308]: mismatched types
+  |
+  = note: expected type `std::vec::Vec<Pixel>`
+             found type `std::vec::Vec<()>`
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0308`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 06 16:16:12.071 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+warning: unnecessary parentheses around `for` head expression
+  |
+  = note: #[warn(unused_parens)] on by default
+
+error[E0308]: mismatched types
+  |
+  = note: expected type `Pixel`
+             found type `()`
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0308`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 06 16:16:28.399 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+warning: unnecessary parentheses around `for` head expression
+  |
+  = note: #[warn(unused_parens)] on by default
+
+error[E0308]: mismatched types
+    |
+    = note: expected type `Pixel`
+               found type `()`
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0308`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 06 16:17:20.579 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+warning: unnecessary parentheses around `for` head expression
+  |
+  = note: #[warn(unused_parens)] on by default
+
+error[E0308]: mismatched types
+help: you can cast an `u8` to `u32`, which will zero-extend the source value
+  |
+1 | .into()extern crate cfg_if;
+  | ^^^^^^^
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0308`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 06 16:17:37.674 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+warning: unnecessary parentheses around `for` head expression
+  |
+  = note: #[warn(unused_parens)] on by default
+
+warning: unused variable: `row`
+  |
+  = note: #[warn(unused_variables)] on by default
+
+warning: unused variable: `col`
+
+error[E0596]: cannot borrow immutable local variable `pixels` as mutable
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0596`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 06 16:18:05.029 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+warning: unnecessary parentheses around `for` head expression
+  |
+  = note: #[warn(unused_parens)] on by default
+
+error[E0596]: cannot borrow immutable local variable `pixels` as mutable
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0596`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 06 16:18:21.873 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+warning: unnecessary parentheses around `for` head expression
+  |
+  = note: #[warn(unused_parens)] on by default
+
+error[E0596]: cannot borrow immutable local variable `pixels` as mutable
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0596`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 06 16:18:43.885 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+warning: unnecessary parentheses around `for` head expression
+  |
+  = note: #[warn(unused_parens)] on by default
+
+error[E0596]: cannot borrow immutable local variable `pixels` as mutable
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0596`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 07 10:58:53.969 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+warning: unnecessary parentheses around `for` head expression
+  --> src/lib.rs:69:22
+   |
+69 |         for index in (0..width * height) {
+   |                      ^^^^^^^^^^^^^^^^^^^ help: remove these parentheses
+   |
+   = note: #[warn(unused_parens)] on by default
+
+error[E0308]: mismatched types
+   --> src/lib.rs:113:13
+    |
+113 |             pixels,
+    |             ^^^^^^ expected struct `Pixel`, found struct `std::vec::Vec`
+    |
+    = note: expected type `std::vec::Vec<Pixel>`
+               found type `std::vec::Vec<std::vec::Vec<{integer}>>`
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0308`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 07 10:59:19.210 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+warning: unnecessary parentheses around `for` head expression
+  --> src/lib.rs:69:22
+   |
+69 |         for index in (0..width * height) {
+   |                      ^^^^^^^^^^^^^^^^^^^ help: remove these parentheses
+   |
+   = note: #[warn(unused_parens)] on by default
+
+error[E0107]: wrong number of type arguments: expected 1, found 0
+  --> src/lib.rs:19:13
+   |
+19 |     pixels: Vec,
+   |             ^^^ expected 1 type argument
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0107`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
+Oct 07 11:02:21.674 ERRO Compilation of your program failed. stderr:
+
+   Compiling image v0.1.0 (/home/simon/Programmering/privat/rust/image)
+warning: unnecessary parentheses around `for` head expression
+  --> src/lib.rs:69:22
+   |
+69 |         for index in (0..width * height) {
+   |                      ^^^^^^^^^^^^^^^^^^^ help: remove these parentheses
+   |
+   = note: #[warn(unused_parens)] on by default
+
+error[E0308]: mismatched types
+   --> src/lib.rs:128:9
+    |
+127 |     pub fn pixels(&self) -> *const Pixel {
+    |                             ------------ expected `*const Pixel` because of return type
+128 |         self.pixels.as_ptr()
+    |         ^^^^^^^^^^^^^^^^^^^^ expected struct `Pixel`, found u8
+    |
+    = note: expected type `*const Pixel`
+               found type `*const u8`
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0308`.
+error: Could not compile `image`.
+
+To learn more, run the command again with --verbose.
+
