@@ -1,7 +1,7 @@
 /* tslint:disable */
 import * as wasm from './image_bg';
 
-let cachedTextDecoder = new TextDecoder('utf-8');
+let cachedTextEncoder = new TextEncoder('utf-8');
 
 let cachegetUint8Memory = null;
 function getUint8Memory() {
@@ -11,19 +11,12 @@ function getUint8Memory() {
     return cachegetUint8Memory;
 }
 
-function getStringFromWasm(ptr, len) {
-    return cachedTextDecoder.decode(getUint8Memory().subarray(ptr, ptr + len));
-}
+function passStringToWasm(arg) {
 
-export function __wbg_alert_1bd7c6874b324324(arg0, arg1) {
-    let varg0 = getStringFromWasm(arg0, arg1);
-    alert(varg0);
-}
-/**
-* @returns {void}
-*/
-export function greet() {
-    return wasm.greet();
+    const buf = cachedTextEncoder.encode(arg);
+    const ptr = wasm.__wbindgen_malloc(buf.length);
+    getUint8Memory().set(buf, ptr);
+    return [ptr, buf.length];
 }
 
 function freeImage(ptr) {
@@ -45,6 +38,15 @@ export class Image {
         const ptr = this.ptr;
         this.ptr = 0;
         freeImage(ptr);
+    }
+
+    /**
+    * @param {string} arg0
+    * @returns {void}
+    */
+    static parse_geometry(arg0) {
+        const [ptr0, len0] = passStringToWasm(arg0);
+        return wasm.image_parse_geometry(ptr0, len0);
     }
     /**
     * @returns {Image}
@@ -70,6 +72,12 @@ export class Image {
     pixels() {
         return wasm.image_pixels(this.ptr);
     }
+}
+
+let cachedTextDecoder = new TextDecoder('utf-8');
+
+function getStringFromWasm(ptr, len) {
+    return cachedTextDecoder.decode(getUint8Memory().subarray(ptr, ptr + len));
 }
 
 export function __wbindgen_throw(ptr, len) {

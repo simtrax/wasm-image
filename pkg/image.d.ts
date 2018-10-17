@@ -1,8 +1,9 @@
 /* tslint:disable */
-export function greet(): void;
-
 export class Image {
 free(): void;
+
+static  parse_geometry(arg0: string): void;
+
 static  new(): Image;
 
  width(): number;
