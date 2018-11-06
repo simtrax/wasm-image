@@ -12,6 +12,9 @@ default-features = ["console_error_panic_hook", "wee_alloc"]
 [dependencies.web-sys]
 version = "0.3"
 features = [
+    "console",
+    "CanvasRenderingContext2d",
+    "ImageData",
     "console"
 ]
 

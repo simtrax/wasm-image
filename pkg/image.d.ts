@@ -1,15 +1,3 @@
 /* tslint:disable */
-export class Image {
-free(): void;
+export function draw(arg0: any, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
 
-static  parse_geometry(arg0: string): void;
-
-static  new(): Image;
-
- width(): number;
-
- height(): number;
-
- pixels(): number;
-
-}

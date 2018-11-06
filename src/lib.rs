@@ -1,81 +1,70 @@
 extern crate cfg_if;
 extern crate wasm_bindgen;
 extern crate web_sys;
-extern crate geojson;
 
 mod utils;
 
 use wasm_bindgen::prelude::*;
-use web_sys::console;
-use geojson::GeoJson;
-
-// #[wasm_bindgen]
-pub struct Pixel {
-    r: u8,
-    g: u8,
-    b: u8,
-    a: u8,
-}
+use wasm_bindgen::Clamped;
+use web_sys::{CanvasRenderingContext2d, ImageData, console};
 
 #[wasm_bindgen]
-pub struct Image {
+pub fn draw(ctx: &CanvasRenderingContext2d,
     width: u32,
     height: u32,
-    pixels: Vec<Pixel>,
-}
+    magnification: u32,
+    pan_x: f32,
+    pan_y: f32
+) -> Result<(), JsValue> {
+    let mut data = Vec::new();
 
-/// Public methods, exported to JavaScript.
-#[wasm_bindgen]
-impl Image {
+    // console::log_1(&"Calculating Mandelbrot".into());
+    for x in 0..width {
+        for y in 0..height {
 
-    pub fn parse_geometry(geojson_str: String) {
-        
-        // console::log_1(&geojson_str.into());
+            let belongs_to_set = check_if_belongs_to_mandelbrot(
+                x as f32 / magnification as f32 - pan_x, 
+                y as f32 / magnification as f32 - pan_y
+            );
 
-        let geojson = geojson_str.parse::<GeoJson>().unwrap();
-
-    }
-
-    pub fn new() -> Image {
-        let width = 500;
-        let height = 500;
-
-        let pixels = (0..width * height)
-            .map(|i| {
-                if i % 2 == 0 || i % 7 == 0 {
-                    Pixel {
-                        r: 0,
-                        g: 0,
-                        b: (i * width / height * 255) as u8,
-                        a: 255
-                    }
-                } else {
-                    Pixel {
-                        r: (i * width / height * 255) as u8,
-                        g: 255,
-                        b: 255,
-                        a: 255
-                    }
-                }
-            })
-            .collect();
-
-        Image {
-            width,
-            height,
-            pixels,
+            if belongs_to_set {
+                data.push(255);
+                data.push(255);
+                data.push(255);
+                data.push(255);
+            } else {
+                data.push(0);
+                data.push(0);
+                data.push(0);
+                data.push(255);
+            }
         }
     }
 
-    pub fn width(&self) -> u32 {
-        self.width
+    let data = ImageData::new_with_u8_clamped_array_and_sh(Clamped(&mut data), width, height)?;
+    ctx.put_image_data(&data, 0.0, 0.0)
+}
+
+fn check_if_belongs_to_mandelbrot(x: f32, y: f32) -> bool {
+    let mut real_component_of_result = x;
+    let mut im_component_of_result = y;
+
+    for _i in 0..100 {
+        let temp_real_component = real_component_of_result * real_component_of_result
+                                - im_component_of_result * im_component_of_result
+                                + x;
+
+        let temp_im_component = 2.0 * real_component_of_result * im_component_of_result
+                                + y;
+
+        real_component_of_result = temp_real_component;
+        im_component_of_result = temp_im_component;
     }
 
-    pub fn height(&self) -> u32 {
-        self.height
+    let mut answer = false;
+    if real_component_of_result * im_component_of_result < 5.0 {
+        answer = true;
     }
 
-    pub fn pixels(&self) -> *const Pixel {
-        self.pixels.as_ptr()
-    }
+    answer
 }
