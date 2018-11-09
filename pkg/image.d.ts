@@ -1,14 +1,3 @@
 /* tslint:disable */
-export function greet(): void;
+export function draw(arg0: any, arg1: number, arg2: number, arg3: number, arg4: number, arg5: number): void;
 
-export class Image {
-free(): void;
-static  new(): Image;
-
- width(): number;
-
- height(): number;
-
- pixels(): number;
-
-}

@@ -1,144 +1,70 @@
 extern crate cfg_if;
 extern crate wasm_bindgen;
+extern crate web_sys;
 
 mod utils;
 
 use wasm_bindgen::prelude::*;
-
-// #[wasm_bindgen]
-pub struct Pixel {
-    r: u32,
-    g: u32,
-    b: u32,
-}
+use wasm_bindgen::Clamped;
+use web_sys::{CanvasRenderingContext2d, ImageData, console};
 
 #[wasm_bindgen]
-pub struct Image {
+pub fn draw(ctx: &CanvasRenderingContext2d,
     width: u32,
     height: u32,
-    pixels: Vec<u8>,
-}
+    magnification: u32,
+    pan_x: f32,
+    pan_y: f32
+) -> Result<(), JsValue> {
+    let mut data = Vec::new();
 
-// Private methods
-impl Image {
+    // console::log_1(&"Calculating Mandelbrot".into());
+    for x in 0..width {
+        for y in 0..height {
 
-    // fn get_index(&self, row: u32, column: u32) -> usize {
-    //     (row * self.width + column) as usize
-    // }
-    
-    // fn live_neighbor_count(&self, row: u32, column: u32) -> u8 {
-    //     let mut count = 0;
-    //     for delta_row in [self.height - 1, 0, 1].iter().cloned() {
-    //         for delta_col in [self.width - 1, 0, 1].iter().cloned() {
-    //             if delta_row == 0 && delta_col == 0 {
-    //                 continue;
-    //             }
+            let belongs_to_set = check_if_belongs_to_mandelbrot(
+                x as f32 / magnification as f32 - pan_x, 
+                y as f32 / magnification as f32 - pan_y
+            );
 
-    //             let neighbor_row = (row + delta_row) % self.height;
-    //             let neighbor_col = (column + delta_col) % self.width;
-    //             let idx = self.get_index(neighbor_row, neighbor_col);
-    //             count += self.cells[idx] as u8;
-    //         }
-    //     }
-    //     count
-    // }
-
-}
-
-/// Public methods, exported to JavaScript.
-#[wasm_bindgen]
-impl Image {
-    // pub fn tick(&mut self) {
-    //     // let mut next = self.cells.clone();
-
-    //     for row in 0..self.height {
-    //         for col in 0..self.width {
-                
-    //         }
-    //     }
-
-    // }
-
-    pub fn new() -> Image {
-        let width = 20;
-        let height = 20;
-
-        // let mut pixels: Vec<Pixel> = Vec::new();
-        let mut pixels = Vec::new();
-
-        for index in (0..width * height) {
-            // let pixel: Pixel = if index % 2 == 0 || index % 7 == 0 {
-            //     Pixel {
-            //         r: 0,
-            //         g: 0,
-            //         b: 0
-            //     };
-            // } else {
-            //     Pixel {
-            //         r: 255,
-            //         g: 255,
-            //         b: 255
-            //     };
-            // };
-
-            // pixels.push(Pixel {
-            //     r: 137,
-            //     g: 80,
-            //     b: 78
-            // });
-            pixels.push(137);
-            pixels.push(80);
-            pixels.push(78);
-            pixels.push(255);
-        }
-
-        // let pixels = (0..width * height)
-        //     .map(|i| {
-        //         if i % 2 == 0 || i % 7 == 0 {
-        //             Pixel {
-        //                 r: 0,
-        //                 g: 0,
-        //                 b: 0
-        //             };
-        //         } else {
-        //             Pixel {
-        //                 r: 255,
-        //                 g: 255,
-        //                 b: 255
-        //             };
-        //         }
-        //     })
-        //     .collect();
-
-        Image {
-            width,
-            height,
-            pixels,
+            if belongs_to_set {
+                data.push(255);
+                data.push(255);
+                data.push(255);
+                data.push(255);
+            } else {
+                data.push(0);
+                data.push(0);
+                data.push(0);
+                data.push(255);
+            }
         }
     }
 
-    pub fn width(&self) -> u32 {
-        self.width
-    }
-
-    pub fn height(&self) -> u32 {
-        self.height
-    }
-
-    // pub fn pixels(&self) -> *const Pixel {
-    //     self.pixels.as_ptr()
-    // }
-    pub fn pixels(&self) -> *const u8 {
-        self.pixels.as_ptr()
-    }
+    let data = ImageData::new_with_u8_clamped_array_and_sh(Clamped(&mut data), width, height)?;
+    ctx.put_image_data(&data, 0.0, 0.0)
 }
 
-#[wasm_bindgen]
-extern {
-    fn alert(s: &str);
-}
+fn check_if_belongs_to_mandelbrot(x: f32, y: f32) -> bool {
+    let mut real_component_of_result = x;
+    let mut im_component_of_result = y;
 
-#[wasm_bindgen]
-pub fn greet() {
-    alert("Hello, I'm an application that can create images!");
+    for _i in 0..100 {
+        let temp_real_component = real_component_of_result * real_component_of_result
+                                - im_component_of_result * im_component_of_result
+                                + x;
+
+        let temp_im_component = 2.0 * real_component_of_result * im_component_of_result
+                                + y;
+
+        real_component_of_result = temp_real_component;
+        im_component_of_result = temp_im_component;
+    }
+
+    let mut answer = false;
+    if real_component_of_result * im_component_of_result < 5.0 {
+        answer = true;
+    }
+
+    answer
 }
